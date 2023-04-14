@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "pdf-gpt-reader-mozilla",
+  "version": "1.0",
+  "description": "A simple pdf gpt reader",
+  "icons": {
+    "48": "icons/icon-48.ico",
+    "96": "icons/icon-96.ico"
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/icon-48.ico",
+      "96": "icons/icon-96.ico"
+    },
+    "default_popup": "popup/reader.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "tabs",
+    "storage",
+    "webRequest"
+  ],
+  "background": {
+     "scripts": ["background.js"],
+     "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"],
+      "match_about_blank": true,
+      "all_frames": true
+    }
+  ]
+}
