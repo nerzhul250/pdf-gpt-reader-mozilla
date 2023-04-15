@@ -21,6 +21,7 @@ document.getElementById('processPdf').addEventListener('click', async () => {
   const pages = parsePageRange(pageRange);
   
   const tab = await browser.tabs.query({ active: true, currentWindow: true });
+  console.log(tab)
   const extractedText = await browser.tabs.sendMessage(tab[0].id, { command: 'extractTextFromPdf', pages: pages });
   if (extractedText) {
     const question = document.getElementById('questionInput').value;

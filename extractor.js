@@ -1,5 +1,7 @@
-"use strict";
-async function extractTextFromPdf(pages) {
+ 
+ console.log("hello")
+ 
+ async function extractTextFromPdf(pages) {
   const pdfViewer = document.querySelector('embed[type="application/pdf"]');
   if (!pdfViewer) {
     return null;
@@ -8,7 +10,7 @@ async function extractTextFromPdf(pages) {
   const pdfUrl = pdfViewer.src;
   const response = await fetch(pdfUrl);
   const pdfData = await response.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+  const pdf = await pdfjsLib.getDocument({ data: pdfData });
 
   let extractedText = '';
   for (let i = 1; i <= pdf.numPages; i++) {
@@ -21,7 +23,7 @@ async function extractTextFromPdf(pages) {
 
   return extractedText;
 }
-  
+
 browser.runtime.onMessage.addListener((message) => {
   console.log("got here")
   console.log(message)
@@ -29,3 +31,5 @@ browser.runtime.onMessage.addListener((message) => {
     return extractTextFromPdf(message.pages);
   }
 });
+  
+
